@@ -1,0 +1,194 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="bar bar-header">
+      <!--button class="button button-icon icon ion-location"></button-->
+      <div class="h1 title">
+        <addr-luncher></addr-luncher>{{item.addr | noValue}}
+      </div>
+      <!--a class="button button-icon icon ion-location" href="geo:37.786971,-122.399677;u=35">test</a-->
+    </div>
+  </ion-nav-title>
+    <ion-content class="padding">
+
+      <div class="list card">
+        <div class="item item-divider">
+          車位照片
+        </div>
+        <div class="item item-body">
+          <img ng-src="{{item.photo_1 | photoPath}}" class="full-image">
+        </div>
+      </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              UPARK狀態
+            </div>
+            <label class="item">
+              <span ng-show="mode.status">開放中 (可預約)</span>
+              <span ng-hide="mode.status">未開放</span>
+            </label>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 收費資訊
+            </div>
+            <div class="item item-body">
+              <span>費用: {{item.charge_price | money:item.charge_type}}</span>
+            </div>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 車位資訊
+            </div>
+            <div class="item item-body">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">大樓/地區名稱</span>
+                <p>{{item.district | noValue}}</p>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">車位說明</span>
+                <p>{{item.descriptions_1 | noValue}}</p>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">車位描述</span>
+                <p>{{item.descriptions_2 | noValue}}</p>
+              </label>
+            </div>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 尺寸資訊
+            </div>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">限制高度 (單位: mm)</span>
+              <p>{{item.max_height | noNumValue}}</p>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">限制寬度 (單位: mm)</span>
+              <p>{{item.max_width | noNumValue}}</p>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">限制長度 (單位: mm)</span>
+              <p>{{item.max_length | noNumValue}}</p>
+            </label>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 連絡資訊
+            </div>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">手機號碼</span>
+              <p>{{item.mobile | noValue}}</p>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">電子信箱</span>
+              <p>{{item.email | noValue}}</p>
+            </label>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 其它資訊
+            </div>
+            <ion-toggle ng-model="mode.guard_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.guard_type">有警衛室</span>
+              <span ng-hide="mode.guard_type">無警衛室</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.space_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.space_type">室外停車格</span>
+              <span ng-hide="mode.space_type">室內停車格</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.valet_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.valet_type">提供代客泊車</span>
+              <span ng-hide="mode.valet_type">不提供代客泊車</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.disabled_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.disabled_type">無障礙車位</span>
+              <span ng-hide="mode.disabled_type">一般車位</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.allnight_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.allnight_type">可以停過夜</span>
+              <span ng-hide="mode.allnight_type">不可停過夜</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.holiday_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.holiday_type">平日假日都開放</span>
+              <span ng-hide="mode.holiday_type">假日不開放</span>
+            </ion-toggle>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 開放分享時段
+            </div>
+            <!--label class="item item-input">
+              <span class="input-label">週一</span>
+              <p>{{item.start_time_1 | noOpenTime | date: "HH:mm"}} 至 {{item.end_time_1 | noOpenTime | date: "HH:mm"}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週二</span>
+              <p>{{item.start_time_2 | noOpenTime | date: "HH:mm"}} 至 {{item.end_time_2 | noOpenTime | date: "HH:mm"}}</p>
+            </label-->
+            <label class="item item-input">
+              <span class="input-label">週一</span>
+              <p>{{item.start_time_1 | mysqlTimeFormat2:item.end_time_1}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週二</span>
+              <p>{{item.start_time_2 | mysqlTimeFormat2:item.end_time_2}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週三</span>
+              <p>{{item.start_time_3 | mysqlTimeFormat2:item.end_time_3}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週四</span>
+              <p>{{item.start_time_4 | mysqlTimeFormat2:item.end_time_4}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週五</span>
+              <p>{{item.start_time_5 | mysqlTimeFormat2:item.end_time_5}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週六</span>
+              <p ng-hide="item.holiday_type == 1">未開放</p>
+              <p ng-show="item.holiday_type == 1">{{item.start_time_6 | mysqlTimeFormat2:item.end_time_6}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週日</span>
+              <p ng-hide="item.holiday_type == 1">未開放</p>
+              <p ng-show="item.holiday_type == 1">{{item.start_time_0 | mysqlTimeFormat2:item.end_time_0}}</p>
+            </label>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 註記事項
+            </div>
+            <div class="item item-body">
+              <div>
+                <p>{{item.remarks | noValue}}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 系統資訊
+            </div>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">建立時間</span>
+              <p>{{item.create_time | dateInMillis |date:"yyyy/MM/dd 'at' h:mma"}}</p>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">最近修改時間</span>
+              <p ng-show="mode.updated">尚無更新記錄</p>
+              <p ng-hide="mode.updated">{{item.update_time | dateInMillis |date:"yyyy/MM/dd 'at' h:mma"}}</p>
+            </label>
+          </div>
+
+  </ion-content>
+</ion-view>

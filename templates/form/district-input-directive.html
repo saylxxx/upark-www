@@ -1,0 +1,9 @@
+<label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.district.$touched && myForm.district.$invalid }">
+  <span class="input-label">大樓/地區名稱</span>
+  <input type="text" placeholder="" ng-model="item.district"
+    name="district" class="form-control"
+    ng-maxlength="10">
+  <div class="help-block" ng-messages="myForm.district.$error" ng-if="myForm.district.$touched">
+    <div ng-messages-include="templates/form-errors.html"></div>
+  </div>
+</label>

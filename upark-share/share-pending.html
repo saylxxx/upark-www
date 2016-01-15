@@ -1,0 +1,108 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="bar bar-header">
+      <addr-luncher ng-hide="mode.edit"></addr-luncher>
+      <div class="h1 title">
+        <span ng-hide="mode.edit">待審核車位</span>
+        <span ng-show="mode.edit">編輯模式</span>
+      </div>
+      <button class="button button-clear button-positive" ng-click="edit()" ng-hide="mode.edit" ng-show="item.status == 0">Edit</button>
+    </div>
+  </ion-nav-title>
+    <ion-content class="padding">
+
+      <progress-item model="item"></progress-item>
+
+      <div class="item item-body">
+
+        <photo-view ng-hide="mode.edit" model="item"></photo-view>
+
+        <applytime-view model="item"></applytime-view>
+
+        <div ng-hide="mode.edit">
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 車位資訊
+            </div>
+            <div class="item item-body">
+              <addr-view model="item"></addr-view>
+              <descriptions1-view model="item"></descriptions1-view>
+              <district-view model="item"></district-view>
+            </div>
+          </div>
+          <div class="list card" ng-enabled="mode.edit">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 連絡資訊
+            </div>
+            <mobile-view model="item"></mobile-view>
+            <email-view model="item"></email-view>
+          </div>
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 註記事項
+            </div>
+            <remarks-view model="item"></remarks-view>
+          </div>
+        </div>
+
+        <div class="row" ng-show="mode.edit">
+          <p>請直接編輯下列表單</p>
+        </div>
+
+        <div class="list card" ng-show="mode.edit">
+          <div class="item item-divider">
+            車位照片
+          </div>
+          <photo-input model="item"></photo-input>
+        </div>
+
+        <form name="myForm" ng-show="mode.edit" novalidate>
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 車位資訊
+            </div>
+            <div class="item item-body">
+              <addr-input form="myForm" model="item"></addr-input>
+              <descriptions1-input form="myForm" model="item"></descriptions1-input>
+              <district-input form="myForm" model="item"></district-input>
+            </div>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 連絡資訊
+            </div>
+            <mobile-input form="myForm" model="item"></mobile-input>
+            <email-input form="myForm" model="item"></email-input>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 註記事項
+            </div>
+            <remarks-input form="myForm" model="item" maxlength="50"></remarks-input>
+          </div>
+        </div>
+      </form>
+
+      <div class="row" ng-show="mode.edit">
+        <div class="col col-30 col-offset-20">
+          <cancel-edit></cancel-edit>
+        </div>
+        <div class="col col-50">
+          <button class="button button-block button-light"
+            ng-disabled="
+            myForm.addr.$invalid ||
+            myForm.descriptions_1.$invalid ||
+            myForm.district.$dirty && myForm.district.$invalid ||
+            myForm.mobile.$invalid ||
+            myForm.email.$dirty && myForm.email.$invalid ||
+            myForm.remarks.$dirty && myForm.remarks.$invalid
+            "
+            ng-click="submitEdit()">送出更新</button>
+        </div>
+      </div>
+
+      <button class="button button-block button-assertive" ng-click="cancelItem()" ng-hide="mode.edit" ng-show="item.status == 0">取消申請</button>
+  </ion-content>
+</ion-view>

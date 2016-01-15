@@ -1,0 +1,10 @@
+<div class="item item-body form-group" ng-class="{ 'has-error': myForm.remarks.$touched && myForm.remarks.$invalid }">
+  <div>
+    <input type="text" placeholder="請輸入" ng-model="item.remarks"
+      name="remarks" class="form-control"
+      ng-maxlength="maxlength">
+    <div class="help-block" ng-messages="myForm.remarks.$error" ng-if="myForm.remarks.$touched">
+      <div ng-messages-include="templates/form-errors.html"></div>
+    </div>
+  </div>
+</div>

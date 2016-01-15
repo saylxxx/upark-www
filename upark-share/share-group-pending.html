@@ -1,0 +1,224 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="bar bar-header">
+      <addr-luncher ng-hide="mode.edit"></addr-luncher>
+      <div class="h1 title">
+        <span ng-hide="mode.edit">待審核車位群組</span>
+        <span ng-show="mode.edit">編輯模式</span>
+      </div>
+      <button class="button button-clear button-positive" ng-click="edit()" ng-hide="mode.edit" ng-show="item.status == 0">Edit</button>
+    </div>
+  </ion-nav-title>
+    <ion-content class="padding">
+
+      <progress-item model="item"></progress-item>
+
+      <div class="item item-body">
+
+        <div class="list card" ng-hide="mode.edit">
+          <div class="item item-divider">
+            車位照片
+          </div>
+          <div class="item item-body">
+            <img ng-src="{{item.photo_1 | photoPath}}" class="full-image">
+          </div>
+        </div>
+
+        <div class="list card">
+          <div class="item item-divider">
+            申請時間
+          </div>
+          <div class="item item-body">
+            <p>{{item.create_time | dateInMillis |date:"yyyy/MM/dd 'at' h:mma"}}</p>
+          </div>
+        </div>
+
+        <div ng-hide="mode.edit">
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 車位群組資訊
+            </div>
+            <div class="item item-body">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">車位群組地址</span>
+                <p>{{item.addr}}</p>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">車位數</span>
+                <p>{{item.upark_count}}</p>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">車位群組描述</span>
+                <p>{{item.descriptions_1}}</p>
+              </label>
+              <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.district.$touched && myForm.district.$invalid }">
+                <span class="input-label">大樓/地區名稱</span>
+                <p>{{item.district}}</p>
+              </label>
+            </div>
+          </div>
+          <div class="list card" ng-enabled="mode.edit">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 連絡資訊
+            </div>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">手機號碼</span>
+              <p>{{item.mobile}}</p>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">電子信箱</span>
+              <p>{{item.email}}</p>
+            </label>
+          </div>
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 註記事項
+            </div>
+            <div class="item item-body">
+              <div>
+                <p>{{item.remarks}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" ng-show="mode.edit">
+          <p>請直接編輯下列表單</p>
+        </div>
+
+        <div class="list card" ng-show="mode.edit">
+          <div class="item item-divider">
+            車位照片
+          </div>
+          <div class="item">
+            <img ng-hide="imgURI !== undefined" ng-src="{{item.photo_1 | photoPath}}" class="full-image">
+            <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="full-image">
+            <div class="button-bar">
+              <button class="button icon-left ion-camera" ng-click="takePhoto()">拍照</button>
+              <button class="button icon-left ion-gear-a" ng-click="choosePhoto()">選擇現有照片</button>
+            </div>
+          </div>
+        </div>
+
+        <form name="myForm" ng-show="mode.edit" novalidate>
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 車位群組資訊
+            </div>
+            <div class="item item-body">
+              <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.addr.$touched && myForm.addr.$invalid }">
+                <span class="input-label">車位群組地址</span>
+                <input type="text" placeholder="" ng-model="item.addr"
+                  name="addr" class="form-control"
+                  ng-minlength="5"
+                  ng-maxlength="20"
+                  required>
+                <div class="help-block" ng-messages="myForm.addr.$error" ng-if="myForm.addr.$touched">
+                  <div class="form-error" ng-message="minlength">請正確填入地址 (至少5個字)</div>
+                  <div class="form-error" ng-message="maxlength">請正確填入地址 (最多20個字)</div>
+                  <div ng-messages-include="templates/form-errors.html"></div>
+                </div>
+              </label>
+              <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.upark_count.$touched && myForm.upark_count.$invalid }">
+                <span class="input-label">車位數</span>
+                <input type="number" name="upark_count" class="form-control"
+                  ng-model="item.upark_count"
+                  min="0"
+                  max="9999"
+                  required>
+                  <div class="help-block" ng-messages="myForm.upark_count.$error" ng-if="myForm.upark_count.$touched">
+                    <div ng-messages-include="templates/form-errors.html"></div>
+                  </div>
+              </label>
+              <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.descriptions_1.$touched && myForm.descriptions_1.$invalid }">
+                <span class="input-label">車位群組描述</span>
+                <input type="text" placeholder="" ng-model="item.descriptions_1"
+                  name="descriptions_1" class="form-control"
+                  ng-minlength="3"
+                  ng-maxlength="30"
+                  required>
+                  <div class="help-block" ng-messages="myForm.descriptions_1.$error" ng-if="myForm.descriptions_1.$touched">
+                    <div class="form-error" ng-message="minlength">請正確填入描述 (至少3個字)</div>
+                    <div class="form-error" ng-message="maxlength">請正確填入描述 (最多30個字)</div>
+                    <div ng-messages-include="templates/form-errors.html"></div>
+                  </div>
+              </label>
+              <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.district.$touched && myForm.district.$invalid }">
+                <span class="input-label">大樓/地區名稱</span>
+                <input type="text" placeholder="" ng-model="item.district"
+                  name="district" class="form-control"
+                  ng-maxlength="10">
+                <div class="help-block" ng-messages="myForm.district.$error" ng-if="myForm.district.$touched">
+                  <div ng-messages-include="templates/form-errors.html"></div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 連絡資訊
+            </div>
+            <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.mobile.$touched && myForm.mobile.$invalid }">
+              <span class="input-label">手機號碼</span>
+              <input type="text" placeholder="" ng-model="item.mobile"
+                name="mobile" class="form-control"
+                ng-minlength="10"
+                ng-maxlength="10"
+                required>
+                <div class="help-block" ng-messages="myForm.mobile.$error" ng-if="myForm.mobile.$touched">
+                  <div class="form-error" ng-message="minlength">請正確填入手機號碼 (10個數字)</div>
+                  <div class="form-error" ng-message="maxlength">請正確填入手機號碼 (10個數字)</div>
+                  <div ng-messages-include="templates/form-errors.html"></div>
+                </div>
+            </label>
+            <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.email.$touched && myForm.email.$invalid }">
+              <span class="input-label">電子信箱</span>
+              <input type="email" placeholder="" ng-model="item.email"
+                name="email" class="form-control">
+              <div class="help-block" ng-messages="myForm.email.$error" ng-if="myForm.email.$touched">
+                <div ng-messages-include="templates/form-errors.html"></div>
+              </div>
+            </label>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 註記事項
+            </div>
+            <div class="item item-body form-group" ng-class="{ 'has-error': myForm.remarks.$touched && myForm.remarks.$invalid }">
+              <div>
+                <input type="text" placeholder="請輸入" ng-model="item.remarks"
+                  name="remarks" class="form-control"
+                  ng-maxlength="50">
+                <div class="help-block" ng-messages="myForm.remarks.$error" ng-if="myForm.remarks.$touched">
+                  <div ng-messages-include="templates/form-errors.html"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="row" ng-show="mode.edit">
+        <div class="col col-30 col-offset-20">
+          <button class="button button-block button-light" ng-click="cancelEdit()">取消</button>
+        </div>
+        <div class="col col-50">
+          <button class="button button-block button-light"
+            ng-disabled="
+            myForm.addr.$invalid ||
+            myForm.descriptions_1.$invalid ||
+            myForm.upark_count.$invalid ||
+            myForm.district.$dirty && myForm.district.$invalid ||
+            myForm.mobile.$invalid ||
+            myForm.email.$dirty && myForm.email.$invalid ||
+            myForm.remarks.$dirty && myForm.remarks.$invalid
+            "
+            ng-click="submitEdit()">送出更新</button>
+        </div>
+      </div>
+
+      <button class="button button-block button-assertive" ng-click="cancelItem()" ng-hide="mode.edit" ng-show="item.status == 0">取消申請</button>
+  </ion-content>
+</ion-view>

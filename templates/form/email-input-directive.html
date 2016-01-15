@@ -1,0 +1,8 @@
+<label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.email.$touched && myForm.email.$invalid }">
+  <span class="input-label">電子信箱</span>
+  <input type="email" placeholder="" ng-model="item.email"
+    name="email" class="form-control">
+  <div class="help-block" ng-messages="myForm.email.$error" ng-if="myForm.email.$touched">
+    <div ng-messages-include="templates/form-errors.html"></div>
+  </div>
+</label>

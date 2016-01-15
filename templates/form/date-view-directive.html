@@ -1,0 +1,30 @@
+<label class="item item-input">
+  <span class="input-label">週一</span>
+  <p><span ng-bind="item.start_time_1 | mysqlTimeFormat2:item.end_time_1"></span></p>
+</label>
+<label class="item item-input">
+  <span class="input-label">週二</span>
+  <p><span ng-bind="item.start_time_2 | mysqlTimeFormat2:item.end_time_2"></span></p>
+</label>
+<label class="item item-input">
+  <span class="input-label">週三</span>
+  <p><span ng-bind="item.start_time_3 | mysqlTimeFormat2:item.end_time_3"></span></p>
+</label>
+<label class="item item-input">
+  <span class="input-label">週四</span>
+  <p><span ng-bind="item.start_time_4 | mysqlTimeFormat2:item.end_time_4"></span></p>
+</label>
+<label class="item item-input">
+  <span class="input-label">週五</span>
+  <p><span ng-bind="item.start_time_5 | mysqlTimeFormat2:item.end_time_5"></span></p>
+</label>
+<label class="item item-input">
+  <span class="input-label">週六</span>
+  <p ng-hide="mode.holiday_type">未開放</p>
+  <p ng-show="mode.holiday_type"><span ng-bind="item.start_time_6 | mysqlTimeFormat2:item.end_time_6"></span></p>
+</label>
+<label class="item item-input">
+  <span class="input-label">週日</span>
+  <p ng-hide="mode.holiday_type">未開放</p>
+  <p ng-show="mode.holiday_type"><span ng-bind="item.start_time_0 | mysqlTimeFormat2:item.end_time_0"></span></p>
+</label>

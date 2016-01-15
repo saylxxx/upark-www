@@ -1,0 +1,13 @@
+<label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.addr.$touched && myForm.addr.$invalid }">
+  <span class="input-label">車位地址</span>
+  <input type="text" placeholder="" ng-model="item.addr"
+    name="addr" class="form-control"
+    ng-minlength="5"
+    ng-maxlength="20"
+    required>
+  <div class="help-block" ng-messages="myForm.addr.$error" ng-if="myForm.addr.$touched">
+    <div class="form-error" ng-message="minlength">請正確填入地址 (至少5個字)</div>
+    <div class="form-error" ng-message="maxlength">請正確填入地址 (最多20個字)</div>
+    <div ng-messages-include="templates/form-errors.html"></div>
+  </div>
+</label>

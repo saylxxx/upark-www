@@ -1,0 +1,70 @@
+<ion-view view-title="我的審核清單">
+  <ion-content>
+
+    <ion-list>
+      <div class="item item-divider">
+        審核中 (群組車位)
+      </div>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap"
+        ng-repeat="item in admin.checker_items | filter:{upark_type:'1', status_log:'4', status:'4'}:true" href="#/app/share-admin-group/{{item.upark_check_id}}/{{item.upark_check_log_id}}/{{item.upark_type}}">
+        <img ng-src="{{item.photo_1 | iconPath}}">
+        <h2>{{item.addr}}</h2>
+        <span> 車位數：{{item.upark_count}} 個</span>
+        <p>開始時間: <span am-time-ago="item.create_time"></span></p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+
+      <div class="item item-divider">
+        審核中 (一般車位)
+      </div>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap"
+        ng-repeat="item in admin.checker_items | filter:{upark_type:'0', status_log:'4', status:'4'}:true" href="#/app/share-admin/{{item.upark_check_id}}/{{item.upark_check_log_id}}/{{item.upark_type}}">
+        <img ng-src="{{item.photo_1 | iconPath}}">
+        <h2>{{item.addr}}</h2>
+        <span> 車位數：{{item.upark_count}} 個</span>
+        <p>開始時間: <span am-time-ago="item.create_time"></span></p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+
+      <div class="item item-divider">
+        審核不通過
+      </div>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap"
+        ng-repeat="item in admin.checker_items | filter:{status_log:'2', status:'2'}:true" href="#/app/share-admin-result/{{item.upark_check_id}}/{{item.upark_check_log_id}}">
+        <img ng-src="{{item.photo_1 | iconPath}}">
+        <h2>{{item.addr}}</h2>
+        <p>記錄時間: <span am-time-ago="item.create_time"></span></p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+
+      <div class="item item-divider">
+        審核通過
+      </div>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap"
+        ng-repeat="item in admin.checker_items | filter:{status_log:'1', status:'1'}:true" href="#/app/share-admin-result/{{item.upark_check_id}}/{{item.upark_check_log_id}}">
+        <img ng-src="{{item.photo_1 | iconPath}}">
+        <h2>{{item.addr}}</h2>
+        <p>記錄時間: <span am-time-ago="item.create_time"></span></p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+
+      <!--div class="item item-divider">
+        使用者取消
+      </div>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap"
+        ng-repeat="item in admin.checker_items | filter:{status:'3'}:true" href="#/app/share-admin-result/{{item.upark_check_id}}/{{item.upark_check_log_id}}">
+        <img ng-src="img/ionic.png">
+        <h2>{{item.addr}}</h2>
+        <p>取消時間: <span am-time-ago="item.update_time"></span></p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item-->
+
+      <!--ion-infinite-scroll on-infinite="goInfinite()"></ion-infinite-scroll-->
+    </ion-list>
+
+    <!--div class="card" ng-hide="ctrl.items">
+      無資料
+    </div-->
+
+  </ion-content>
+</ion-view>

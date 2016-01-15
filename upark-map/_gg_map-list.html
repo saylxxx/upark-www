@@ -1,0 +1,35 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="bar bar-header item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input places-auto-complete size=80 id="searchInput"
+          ng-controller="ngMapCtrl"
+          ng-model="inputValue.search"
+          on-place-changed="placeChanged(place)"
+          ng-focus="disableTap()"
+          type="search" placeholder="{{htmlStr.search}}">
+      </label>
+      <button class="button button-clear" ng-click="changeView('/app/map-main')">MAP</button>
+    </div>
+  </ion-nav-title>
+  <ion-content>
+    <button class="button icon-left ion-ios-clock-outline button-full button-light" ng-click="changeView('/app/map-time')" ng-bind="htmlStr.setTime"></button>
+
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap"
+        ng-repeat="item in map.markers" href="#/app/map-detail/{{item.id}}">
+        <img ng-src="{{item.icon}}">
+        <h2>{{item.name}}</h2>
+        <p>{{item.desc}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <!--ion-option-button class="button-assertive" ng-click="remove(chat)">
+          Delete
+        </ion-option-button-->
+      </ion-item>
+      <!--ion-infinite-scroll on-infinite="goInfinite()"></ion-infinite-scroll-->
+    </ion-list>
+
+  </ion-content>
+</ion-view>

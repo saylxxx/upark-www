@@ -1,0 +1,8 @@
+<div class="item">
+  <img ng-hide="imgURI !== undefined" ng-src="{{item.photo_1 | photoPath}}" class="full-image">
+  <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="full-image">
+  <div class="button-bar">
+    <button class="button icon-left ion-camera" ng-click="takePhoto()">拍照</button>
+    <button class="button icon-left ion-gear-a" ng-click="choosePhoto()">選擇現有照片</button>
+  </div>
+</div>

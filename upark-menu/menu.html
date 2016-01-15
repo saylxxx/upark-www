@@ -1,0 +1,66 @@
+<ion-side-menus enable-menu-with-back-views="false">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-stable" ng-click="magic()">
+      <h1 class="title">UPARK</h1>
+    </ion-header-bar>
+    <ion-content>
+      <ion-list>
+        <ion-item menu-close href="#/app/map-main" ng-hide="mode.admin">
+        <!--ion-item menu-close ng-click="uparkMap()" ng-hide="mode.admin"-->
+          <i class="icon ion-search"></i>
+          找車位
+        </ion-item>
+        <ion-item menu-close href="#/app/share-main" ng-hide="mode.admin">
+          <i class="icon ion-android-people"></i>
+          我的車位
+        </ion-item>
+        <ion-item menu-close href="#/app/share-group-main" ng-hide="mode.admin">
+          <i class="icon ion-android-people"></i>
+          我的停車場
+        </ion-item>
+        <ion-item menu-close href="#/app/booking-main" ng-hide="mode.admin">
+          <i class="icon ion-ios-calendar-outline"></i>
+          我的預約
+        </ion-item>
+        <ion-item menu-close href="#/app/user-main" ng-hide="mode.admin">
+          <i class="icon ion-ios-help-empty"></i>
+          加入會員
+        </ion-item>
+        <ion-item menu-close href="#/app/money-main" ng-hide="mode.admin">
+          <i class="icon ion-ios-help-empty"></i>
+          付款
+        </ion-item>
+        <ion-item menu-close href="#/app/test" ng-hide="mode.admin">
+          <i class="icon ion-ios-help-empty"></i>
+          測試..
+        </ion-item>
+
+
+        <!-- admin -->
+        <ion-item menu-close href="#/app/admin-main" ng-show="mode.admin">
+          <i class="icon ion-ios-color-wand"></i>
+          UPARK待審核清單
+        </ion-item>
+        <ion-item menu-close href="#/app/admin-log" ng-show="mode.admin">
+          <i class="icon ion-ios-color-wand"></i>
+          我的審核清單
+        </ion-item>
+
+
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

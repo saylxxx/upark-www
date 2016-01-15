@@ -1,0 +1,72 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="bar bar-header">
+      <addr-luncher></addr-luncher>
+      <div class="h1 title">待審核車位資訊</div>
+      <!--button class="button button-clear button-positive" ng-click="edit()" ng-hide="mode.edit">Lock</button-->
+    </div>
+  </ion-nav-title>
+    <ion-content class="padding">
+
+      <progress-item model="item"></progress-item>
+
+      <div class="item item-body">
+
+        <div class="list card">
+          <div class="item item-divider">
+            申請時間
+          </div>
+          <div class="item item-body">
+            <p>{{item.create_time | dateInMillis | date:"yyyy/MM/dd 'at' h:mma"}}</p>
+          </div>
+        </div>
+
+        <button class="button button-block button-assertive" ng-click="startCheck()" ng-show="item.status == 0">我要審核</button>
+
+        <div>
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 車位資訊
+            </div>
+            <div class="item item-body">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">車位地址</span>
+                <p>{{item.addr}}</p>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">車位描述</span>
+                <p>{{item.descriptions_1}}</p>
+              </label>
+              <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.district.$touched && myForm.district.$invalid }">
+                <span class="input-label">大樓/地區名稱</span>
+                <p>{{item.district}}</p>
+              </label>
+            </div>
+          </div>
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 連絡資訊
+            </div>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">手機號碼</span>
+              <p>{{item.mobile}}</p>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">電子信箱</span>
+              <p>{{item.email}}</p>
+            </label>
+          </div>
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 註記事項
+            </div>
+            <div class="item item-body">
+              <div>
+                <p>{{item.remarks}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+  </ion-content>
+</ion-view>

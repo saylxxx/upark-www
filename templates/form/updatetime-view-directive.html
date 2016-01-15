@@ -1,0 +1,5 @@
+<label class="item item-input item-stacked-label">
+  <span class="input-label">最近修改時間</span>
+  <p ng-show="mode.updated">尚無更新記錄</p>
+  <p ng-hide="mode.updated"><span ng-bind="item.update_time | dateInMillis |date:'yyyy/MM/dd (h:mma)'"></span></p>
+</label>

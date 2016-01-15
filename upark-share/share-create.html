@@ -1,0 +1,144 @@
+<ion-view view-title="建立新車位">
+  <ion-content class="padding">
+
+    <div class="list card">
+      <div class="item item-divider">
+        車位照片
+      </div>
+      <div class="item item-body">
+        <div class="button-bar">
+          <button class="button icon-left ion-camera" ng-click="takePhoto()">拍照</button>
+          <button class="button icon-left ion-gear-a" ng-click="choosePhoto()">選擇現有照片</button>
+          <!--button class="button icon-left ion-gear-a" ng-click="uploadPhoto()">上傳TEST</button-->
+        </div>
+        <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="full-image">
+      </div>
+    </div>
+
+      <form name="myForm" class="list" novalidate>
+
+        <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.addr.$touched && myForm.addr.$invalid }">
+          <span class="input-label">車位地址</span>
+          <input type="text" name="addr" class="form-control"
+            ng-model="item.addr"
+            ng-minlength="5"
+            ng-maxlength="20"
+            required>
+          <div class="help-block" ng-messages="myForm.addr.$error" ng-if="myForm.addr.$touched">
+            <div class="form-error" ng-message="minlength">請正確填入地址 (至少5個字)</div>
+            <div class="form-error" ng-message="maxlength">請正確填入地址 (最多20個字)</div>
+            <div ng-messages-include="templates/form-errors.html"></div>
+          </div>
+        </label>
+
+        <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.descriptions_1.$touched && myForm.descriptions_1.$invalid }">
+          <span class="input-label">車位描述</span>
+          <input type="text" name="descriptions_1" class="form-control"
+            ng-model="item.descriptions_1"
+            ng-minlength="3"
+            ng-maxlength="30"
+            required>
+            <div class="help-block" ng-messages="myForm.descriptions_1.$error" ng-if="myForm.descriptions_1.$touched">
+              <div class="form-error" ng-message="minlength">請正確填入車位描述 (至少3個字)</div>
+              <div class="form-error" ng-message="maxlength">請正確填入車位描述 (最多30個字)</div>
+              <div ng-messages-include="templates/form-errors.html"></div>
+            </div>
+        </label>
+
+        <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.mobile.$touched && myForm.mobile.$invalid }">
+          <span class="input-label">手機號碼</span>
+          <input type="text" name="mobile" class="form-control"
+            ng-model="item.mobile"
+            ng-minlength="10"
+            ng-maxlength="10"
+            required>
+            <div class="help-block" ng-messages="myForm.mobile.$error" ng-if="myForm.mobile.$touched">
+              <div class="form-error" ng-message="minlength">請正確填入手機號碼 (10個數字)</div>
+              <div class="form-error" ng-message="maxlength">請正確填入手機號碼 (10個數字)</div>
+              <div ng-messages-include="templates/form-errors.html"></div>
+            </div>
+        </label>
+
+        <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.email.$touched && myForm.email.$invalid }">
+          <span class="input-label">電子信箱</span>
+          <input type="email" name="email" class="form-control"
+            ng-model="item.email">
+            <div class="help-block" ng-messages="myForm.email.$error" ng-if="myForm.email.$touched">
+              <div ng-messages-include="templates/form-errors.html"></div>
+            </div>
+        </label>
+
+        <label class="item">
+          <button class="button button-block button-balanced" type="submit"
+            ng-disabled="
+              myForm.addr.$invalid ||
+              myForm.descriptions_1.$invalid ||
+              myForm.mobile.$invalid ||
+              myForm.email.$dirty && myForm.email.$invalid
+              "
+            ng-click="createItem()">+ 加入車位分享</button>
+        </label>
+
+      </form>
+
+
+
+      <!--form class="list">
+        <label class="item item-input item-stacked-label form-group">
+          <span class="input-label">車位地址</span>
+          <input type="text" placeholder="" ng-model="item.addr" class="form-control"
+            data-validation="length"
+            data-validation-length="5-20"
+            data-validation-error-msg="請輸入車位地址 (最多20個字元)">
+        </label>
+        <label class="item item-input item-stacked-label form-group">
+          <span class="input-label">車位描述</span>
+          <input type="text" placeholder="" ng-model="item.descriptions_1" class="form-control"
+            data-validation-optional="true"
+            data-validation="length"
+            data-validation-length="max20"
+            data-validation-error-msg="最多20個字元">
+        </label>
+        <label class="item item-input item-stacked-label form-group">
+          <span class="input-label">手機號碼</span>
+          <input type="number" placeholder="" ng-model="item.mobile" class="form-control"
+            data-validation="number"
+            data-validation-error-msg="請輸入正確手機號碼">
+        </label>
+        <label class="item item-input item-stacked-label form-group">
+          <span class="input-label">電子信箱</span>
+          <input type="email" placeholder="" ng-model="item.email" class="form-control"
+            data-validation-optional="true"
+            data-validation="email"
+            data-validation-error-msg="請輸入正確的信箱">
+        </label>
+        <label class="item">
+          <button class="button button-block button-balanced" type="submit" ng-click="createItem()">+ 加入車位分享</button>
+        </label>
+      </form-->
+
+    <!--div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">地址</span>
+        <input type="text" placeholder="" ng-model="item.addr">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">車位描述</span>
+        <input type="text" placeholder="" ng-model="item.descriptions_1">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">手機號碼</span>
+        <input type="text" placeholder="" ng-model="item.mobile">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">電子信箱</span>
+        <input type="text" placeholder="" ng-model="item.email">
+      </label>
+      <label class="item">
+        <button class="button button-block button-balanced" type="submit" ng-click="createItem()">+ 加入車位分享</button>
+      </label>
+    </div-->
+
+
+  </ion-content>
+</ion-view>

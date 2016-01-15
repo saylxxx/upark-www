@@ -1,0 +1,47 @@
+<ion-view view-title="{{title}}">
+  <ion-content>
+    <!--tap fixed: http://ionicframework.com/docs/api/page/tap/ -->
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" control="map.control" data-tap-disabled="true">
+
+      <!-- Map Pins -->
+      <ui-gmap-markers models="map.markers" idKey="'id'" coords="'self'" events="map.markersEvents">
+      </ui-gmap-markers>
+
+      <!-- InfoWindows -->
+<!-- this works, but infowindow is not attached to marker -->
+      <ui-gmap-window
+        show="map.window.show"
+        coords="map.window.model"
+        templateParameter="map.window.model"
+        options="map.window.options"
+        ng-cloak>
+        <div>
+            I should not be attached to a
+            marker.
+            <div>
+                <a class="btn" ng-click="clickedButtonInWindow()">CLICK ME</a>
+            </div>
+            <p>This is an info window at {{ latitude | number:4 }}, {{ longitude | number:4 }}!</p>
+            <p> attach data: {{ data }}</p>
+            <p class="muted">My marker will stay open when the window is popped up!</p>
+        </div>
+      </ui-gmap-window>
+<!-- try this instead of the above and the template does not load -->
+<!-- <ui-gmap-window show="map.window.show" coords="map.window.model" templateUrl="'infowindow.tpl'" ng-cloak></ui-gmap-window>-->
+
+    </ui-gmap-google-map>
+
+
+    <ul class="location-list">
+      <li ng-repeat="marker in map.markers" ng-class="{selected: marker == map.window.model}" ng-click="map.window.model = marker">
+        Location #{{marker.id}} is at: ({{marker.latitude}}, {{marker.longitude}}), attach data: {{marker.data}}
+      </li>
+    </ul>
+    <br>
+    <span>geo:{{geo}}</span>
+    <br>
+    <br>
+    <span>window:{{map.window}}</span>
+
+  </ion-content>
+</ion-view>

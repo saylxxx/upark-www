@@ -1,0 +1,84 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="bar bar-header item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input places-auto-complete size=80 id="searchInput"
+          ng-model="inputValue.search"
+          on-place-changed="placeChanged(place)"
+          ng-focus="disableTap()"
+          type="search" placeholder="{{htmlStr.search}}">
+      </label>
+      <i class="icon ion-ios-close placeholder-icon" ng-click="inputValue.search = ''"></i>
+      <!--button class="button button-clear" ng-click="changeView('/app/map-list')">LIST</button-->
+      <button class="button button-clear" ng-click="toggleMap()">
+        <span ng-show="info.isMap">LIST</span>
+        <span ng-show="!info.isMap">MAP</span>
+      </button>
+    </div>
+  </ion-nav-title>
+  <ion-content>
+    <button class="button icon-left ion-ios-clock-outline button-full button-light" ng-click="changeView('/app/map-time')" ng-bind="htmlStr.setTime"></button>
+
+    <div>
+      <!-- map -->
+      <div ng-show="info.isMap">
+        <map center="current-location" disable-default-u-i="true" data-tap-disabled="true" id="mapElementId">
+        </map>
+
+        <div class="list card" ng-show="info.selected">
+          <a class="item item item-avatar item-icon-right" href="#/app/upark-item-view/{{markerData.upark_id}}">
+            <img ng-src="{{markerData.photo_1 | iconPath}}">
+            <h2>{{markerData.addr}}</h2>
+            <p>{{markerData.district}}</p>
+            <i class="icon ion-chevron-right icon-accessory"><span>{{markerData.distance | distance}}</span></i>
+          </a>
+          <a class="item item-icon-left assertive" href="#">
+            <i class="icon ion-cash"></i>
+            預約使用點數： {{markerData.charge_price | money:markerData.charge_type}}
+          </a>
+        </div>
+        <div class="card" ng-hide="info.selected">
+          <div class="item item-divider">
+            <i class="icon ion-search"></i> 附近的車位
+          </div>
+          <a class="item item-text-wrap">
+            數量：<span>{{info.count}} </span> 筆
+          </a>
+        </div>
+      </div>
+
+      <!-- list -->
+      <div ng-hide="info.isMap">
+        <ion-list>
+          <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap"
+            ng-repeat="item in items | orderBy:'distance'" href="#/app/upark-item-view/{{item.upark_id}}">
+            <img ng-src="{{item.photo_1 | iconPath}}">
+            <h2>{{item.addr}}</h2>
+            <p>{{item.district}}</p>
+            距離現在位置：<span>{{item.distance | distance}}</span>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+
+            <!--ion-option-button class="button-assertive" ng-click="remove(chat)">
+              Delete
+            </ion-option-button-->
+          </ion-item>
+          <!--ion-infinite-scroll on-infinite="goInfinite()"></ion-infinite-scroll-->
+        </ion-list>
+      </div>
+    </div>
+
+    <!-- test -->
+    <div class="card"></div>
+
+    <!--div class="card">
+      <p>items: {{items}}</p>
+      <p>markerData1: {{markerData}}</p>
+      <p>markerData2: {{MapService.markerData}}</p>
+
+      <p ng-bind="markerData.name"></p>
+      <p ng-bind="MapService.markerData.name"></p>
+    </div-->
+
+  </ion-content>
+</ion-view>

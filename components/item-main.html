@@ -1,0 +1,551 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="bar bar-header">
+      <div class="h1 title">
+        <span ng-hide="mode.edit"><addr-luncher></addr-luncher>{{item.addr | noValue}}</span>
+        <span ng-show="mode.edit">編輯模式</span>
+      </div>
+      <button class="button" ng-click="edit()" ng-hide="mode.edit">Edit</button>
+    </div>
+  </ion-nav-title>
+    <ion-content class="padding">
+
+          <div class="list card" ng-hide="mode.edit">
+            <div class="item item-divider">
+              UPARK狀態
+            </div>
+            <label class="item">
+              <ion-toggle ng-model="mode.status" toggle-class="toggle-calm" ng-click="toggleStatus()">
+                <span ng-show="mode.status">開放中 (可預約)</span>
+                <span ng-hide="mode.status">未開放</span>
+              </ion-toggle>
+            </label>
+          </div>
+
+        <div ng-hide="mode.edit">
+
+          <photo-view ng-hide="mode.edit" model="item"></photo-view>
+
+          <charge-view model="item"></charge-view>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 車位資訊
+            </div>
+            <div class="item item-body">
+              <district-view model="item"></district-view>
+              <descriptions1-view model="item"></descriptions1-view>
+              <descriptions2-view model="item"></descriptions2-view>
+              <!--label class="item item-input item-stacked-label">
+                <span class="input-label">大樓/地區名稱</span>
+                <p>{{item.district | noValue}}</p>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">車位說明</span>
+                <p>{{item.descriptions_1 | noValue}}</p>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">車位描述</span>
+                <p>{{item.descriptions_2 | noValue}}</p>
+              </label-->
+            </div>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 尺寸資訊
+            </div>
+            <size-view model="item"></size-view>
+            <!--label class="item item-input item-stacked-label">
+              <span class="input-label">限制高度 (單位: mm)</span>
+              <p>{{item.max_height | noNumValue}}</p>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">限制寬度 (單位: mm)</span>
+              <p>{{item.max_width | noNumValue}}</p>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">限制長度 (單位: mm)</span>
+              <p>{{item.max_length | noNumValue}}</p>
+            </label-->
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 連絡資訊
+            </div>
+            <mobile-view model="item"></mobile-view>
+            <email-view model="item"></email-view>
+            <!--label class="item item-input item-stacked-label">
+              <span class="input-label">手機號碼</span>
+              <p>{{item.mobile | noValue}}</p>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">電子信箱</span>
+              <p>{{item.email | noValue}}</p>
+            </label-->
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 其它資訊
+            </div>
+            <meta-view mode="mode"></meta-view>
+            <!--ion-toggle ng-model="mode.guard_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.guard_type">有警衛室</span>
+              <span ng-hide="mode.guard_type">無警衛室</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.space_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.space_type">室外停車格</span>
+              <span ng-hide="mode.space_type">室內停車格</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.valet_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.valet_type">提供代客泊車</span>
+              <span ng-hide="mode.valet_type">不提供代客泊車</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.disabled_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.disabled_type">無障礙車位</span>
+              <span ng-hide="mode.disabled_type">一般車位</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.allnight_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.allnight_type">可以停過夜</span>
+              <span ng-hide="mode.allnight_type">不可停過夜</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.holiday_type" toggle-class="toggle-calm" ng-disabled="true">
+              <span ng-show="mode.holiday_type">平日假日都開放</span>
+              <span ng-hide="mode.holiday_type">假日不開放</span>
+            </ion-toggle-->
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 開放分享時段
+            </div>
+            <date-view model="item" mode="mode"></date-view>
+            <!--label class="item item-input">
+              <span class="input-label">週一</span>
+              <p>{{item.start_time_1 | mysqlTimeFormat2:item.end_time_1}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週二</span>
+              <p>{{item.start_time_2 | mysqlTimeFormat2:item.end_time_2}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週三</span>
+              <p>{{item.start_time_3 | mysqlTimeFormat2:item.end_time_3}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週四</span>
+              <p>{{item.start_time_4 | mysqlTimeFormat2:item.end_time_4}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週五</span>
+              <p>{{item.start_time_5 | mysqlTimeFormat2:item.end_time_5}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週六</span>
+              <p ng-hide="mode.holiday_type">未開放</p>
+              <p ng-show="mode.holiday_type">{{item.start_time_6 | mysqlTimeFormat2:item.end_time_6}}</p>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">週日</span>
+              <p ng-hide="mode.holiday_type">未開放</p>
+              <p ng-show="mode.holiday_type">{{item.start_time_0 | mysqlTimeFormat2:item.end_time_0}}</p>
+            </label-->
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 註記事項
+            </div>
+            <remarks-view model="item"></remarks-view>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 系統資訊
+            </div>
+            <createtime-view model="item"></createtime-view>
+            <updatetime-view model="item" mode="mode"></updatetime-view>
+            <!--label class="item item-input item-stacked-label">
+              <span class="input-label">建立時間</span>
+              <p>{{item.create_time | dateInMillis |date:"yyyy/MM/dd 'at' h:mma"}}</p>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">最近修改時間</span>
+              <p ng-show="mode.updated">尚無更新記錄</p>
+              <p ng-hide="mode.updated">{{item.update_time | dateInMillis |date:"yyyy/MM/dd 'at' h:mma"}}</p>
+            </label-->
+          </div>
+
+        </div>
+
+
+        <div class="list card" ng-show="mode.edit">
+          <div class="item item-divider">
+            <i class="icon ion-ios-pricetag-outline"></i> UPARK地址
+          </div>
+          <addr-view model="item"></addr-view>
+        </div>
+
+        <div class="row" ng-show="mode.edit">
+          <p>請直接編輯下列表單</p>
+        </div>
+
+        <div class="list card" ng-show="mode.edit">
+          <div class="item item-divider">
+            車位照片
+          </div>
+          <photo-input model="item"></photo-input>
+          <!--div class="item item-body">
+            <img ng-hide="imgURI !== undefined" ng-src="{{item.photo_1 | photoPath}}" class="full-image">
+            <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" class="full-image">
+            <div class="button-bar">
+              <button class="button icon-left ion-camera" ng-click="takePhoto()">拍照</button>
+              <button class="button icon-left ion-gear-a" ng-click="choosePhoto()">選擇現有照片</button>
+            </div>
+          </div-->
+        </div>
+
+        <form name="myForm" ng-show="mode.edit" novalidate>
+
+          <!--charge-input model="item" mode="mode"></charge-input-->
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 收費資訊
+            </div>
+            <div class="item item-body">
+              <ion-toggle ng-model="mode.charge" toggle-class="toggle-calm" ng-click="toggleCharge()">
+                <span ng-show="mode.charge">每小時計費</span>
+                <span ng-hide="mode.charge">不設定</span>
+              </ion-toggle>
+              <label class="item" ng-show="mode.charge">
+                <div class="range range-positive">
+                  <i class="icon ion-ios-pulse"></i>
+                  <input type="range" name="volume" min="0" max="100" ng-model="item.charge_price">
+                  <i class="icon ion-ios-pulse-strong"></i>
+                </div>
+                <span>費用: {{item.charge_price | money:item.charge_type}}</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 車位資訊
+            </div>
+            <div class="item item-body">
+              <district-input form="myForm" model="item"></district-input>
+              <descriptions1-input form="myForm" model="item"></descriptions1-input>
+              <descriptions2-input form="myForm" model="item"></descriptions2-input>
+              <!--label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.district.$touched && myForm.district.$invalid }">
+                <span class="input-label">大樓/地區名稱</span>
+                <input type="text" placeholder="" ng-model="item.district"
+                  name="district" class="form-control"
+                  ng-maxlength="10">
+                <div class="help-block" ng-messages="myForm.district.$error" ng-if="myForm.district.$touched">
+                  <div ng-messages-include="templates/form-errors.html"></div>
+                </div>
+              </label>
+              <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.descriptions_1.$touched && myForm.descriptions_1.$invalid }">
+                <span class="input-label">*車位說明</span>
+                <input type="text" placeholder="" ng-model="item.descriptions_1"
+                  name="descriptions_1" class="form-control"
+                  ng-maxlength="100"
+                  required>
+                  <div class="help-block" ng-messages="myForm.descriptions_1.$error" ng-if="myForm.descriptions_1.$touched">
+                    <div ng-messages-include="templates/form-errors.html"></div>
+                  </div>
+              </label>
+              <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.descriptions_2.$touched && myForm.descriptions_2.$invalid }">
+                <span class="input-label">車位描述</span>
+                <input type="text" placeholder="" ng-model="item.descriptions_2"
+                  name="descriptions_2" class="form-control"
+                  ng-maxlength="200">
+                  <div class="help-block" ng-messages="myForm.descriptions_2.$error" ng-if="myForm.descriptions_2.$touched">
+                    <div ng-messages-include="templates/form-errors.html"></div>
+                  </div>
+              </label-->
+            </div>
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 尺寸資訊
+            </div>
+            <size-input form="myForm" model="item"></size-input>
+            <!--label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.max_height.$touched && myForm.max_height.$invalid }">
+              <span class="input-label">限制高度 (單位: cm)</span>
+              <input type="number" placeholder="" ng-model="item.max_height"
+                name="max_height" class="form-control"
+                min="0"
+                max="999">
+                <div class="help-block" ng-messages="myForm.max_height.$error" ng-if="myForm.max_height.$touched">
+                  <div ng-messages-include="templates/form-errors.html"></div>
+                </div>
+            </label>
+            <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.max_width.$touched && myForm.max_width.$invalid }">
+              <span class="input-label">限制寬度 (單位: cm)</span>
+              <input type="number" placeholder="" ng-model="item.max_width"
+                name="max_width" class="form-control"
+                min="0"
+                max="999">
+                <div class="help-block" ng-messages="myForm.max_width.$error" ng-if="myForm.max_width.$touched">
+                  <div ng-messages-include="templates/form-errors.html"></div>
+                </div>
+            </label>
+            <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.max_length.$touched && myForm.max_length.$invalid }">
+              <span class="input-label">限制長度 (單位: cm)</span>
+              <input type="number" placeholder="" ng-model="item.max_length"
+                name="max_length" class="form-control"
+                min="0"
+                max="999">
+                <div class="help-block" ng-messages="myForm.max_length.$error" ng-if="myForm.max_length.$touched">
+                  <div ng-messages-include="templates/form-errors.html"></div>
+                </div>
+            </label-->
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 連絡資訊
+            </div>
+            <mobile-input form="myForm" model="item"></mobile-input>
+            <email-input form="myForm" model="item"></email-input>
+            <!--label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.mobile.$touched && myForm.mobile.$invalid }">
+              <span class="input-label">*手機號碼</span>
+              <input type="text" placeholder="" ng-model="item.mobile"
+                name="mobile" class="form-control"
+                ng-minlength="10"
+                ng-maxlength="10"
+                required>
+                <div class="help-block" ng-messages="myForm.mobile.$error" ng-if="myForm.mobile.$touched">
+                  <div class="form-error" ng-message="minlength">請正確填入手機號碼 (10個數字)</div>
+                  <div class="form-error" ng-message="maxlength">請正確填入手機號碼 (10個數字)</div>
+                  <div ng-messages-include="templates/form-errors.html"></div>
+                </div>
+            </label>
+            <label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.email.$touched && myForm.email.$invalid }">
+              <span class="input-label">電子信箱</span>
+              <input type="email" placeholder="" ng-model="item.email"
+                name="email" class="form-control">
+              <div class="help-block" ng-messages="myForm.email.$error" ng-if="myForm.email.$touched">
+                <div ng-messages-include="templates/form-errors.html"></div>
+              </div>
+            </label-->
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 其它資訊
+            </div>
+            <meta-input mode="mode"></meta-input>
+            <!--ion-toggle ng-model="mode.guard_type" toggle-class="toggle-calm">
+              <span ng-show="mode.guard_type">有警衛室</span>
+              <span ng-hide="mode.guard_type">無警衛室</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.space_type" toggle-class="toggle-calm">
+              <span ng-show="mode.space_type">室外停車格</span>
+              <span ng-hide="mode.space_type">室內停車格</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.valet_type" toggle-class="toggle-calm">
+              <span ng-show="mode.valet_type">提供代客泊車</span>
+              <span ng-hide="mode.valet_type">不提供代客泊車</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.disabled_type" toggle-class="toggle-calm">
+              <span ng-show="mode.disabled_type">無障礙車位</span>
+              <span ng-hide="mode.disabled_type">一般車位</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.allnight_type" toggle-class="toggle-calm">
+              <span ng-show="mode.allnight_type">可以停過夜</span>
+              <span ng-hide="mode.allnight_type">不可停過夜</span>
+            </ion-toggle>
+            <ion-toggle ng-model="mode.holiday_type" toggle-class="toggle-calm">
+              <span ng-show="mode.holiday_type">平日假日都開放</span>
+              <span ng-hide="mode.holiday_type">假日不開放</span>
+            </ion-toggle-->
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 開放分享時段
+            </div>
+
+              <div class="row item">
+                <div class="col">
+                  <span>週一</span>
+                </div>
+                <div class="col col-80">
+                  <ionic-timepicker input-obj="mode.timePickerObject">
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('start_time_1')">
+                      <standard-time-meridian>{{item.start_time_1 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                    <span> 至 </span>
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('end_time_1')">
+                      <standard-time-meridian>{{item.end_time_1 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                  </ionic-timepicker>
+                  <span>
+                    <button class="button icon ion-ios-refresh-empty" ng-click="timeClearAll('start_time_1', 'end_time_1')"></button>
+                  </span>
+                </div>
+              </div>
+              <div class="row item">
+                <div class="col">
+                  <span>週二</span>
+                </div>
+                <div class="col col-80">
+                  <ionic-timepicker input-obj="mode.timePickerObject">
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('start_time_2')">
+                      <standard-time-meridian>{{item.start_time_2 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                    <span> 至 </span>
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('end_time_2')">
+                      <standard-time-meridian>{{item.end_time_2 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                  </ionic-timepicker>
+                  <span>
+                    <button class="button icon ion-ios-refresh-empty" ng-click="timeClearAll('start_time_2', 'end_time_2')"></button>
+                  </span>
+                </div>
+              </div>
+              <div class="row item">
+                <div class="col">
+                  <span>週三</span>
+                </div>
+                <div class="col col-80">
+                  <ionic-timepicker input-obj="mode.timePickerObject">
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('start_time_3')">
+                      <standard-time-meridian>{{item.start_time_3 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                    <span> 至 </span>
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('end_time_3')">
+                      <standard-time-meridian>{{item.end_time_3 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                  </ionic-timepicker>
+                  <span>
+                    <button class="button icon ion-ios-refresh-empty" ng-click="timeClearAll('start_time_3', 'end_time_3')"></button>
+                  </span>
+                </div>
+              </div>
+              <div class="row item">
+                <div class="col">
+                  <span>週四</span>
+                </div>
+                <div class="col col-80">
+                  <ionic-timepicker input-obj="mode.timePickerObject">
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('start_time_4')">
+                      <standard-time-meridian>{{item.start_time_4 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                    <span> 至 </span>
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('end_time_4')">
+                      <standard-time-meridian>{{item.end_time_4 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                  </ionic-timepicker>
+                  <span>
+                    <button class="button icon ion-ios-refresh-empty" ng-click="timeClearAll('start_time_4', 'end_time_4')"></button>
+                  </span>
+                </div>
+              </div>
+              <div class="row item">
+                <div class="col">
+                  <span>週五</span>
+                </div>
+                <div class="col col-80">
+                  <ionic-timepicker input-obj="mode.timePickerObject">
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('start_time_5')">
+                      <standard-time-meridian>{{item.start_time_5 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                    <span> 至 </span>
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('end_time_5')">
+                      <standard-time-meridian>{{item.end_time_5 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                  </ionic-timepicker>
+                  <span>
+                    <button class="button icon ion-ios-refresh-empty" ng-click="timeClearAll('start_time_5', 'end_time_5')"></button>
+                  </span>
+                </div>
+              </div>
+              <div class="row item" ng-show="mode.holiday_type">
+                <div class="col">
+                  <span>週六</span>
+                </div>
+                <div class="col col-80">
+                  <ionic-timepicker input-obj="mode.timePickerObject">
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('start_time_6')">
+                      <standard-time-meridian>{{item.start_time_6 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                    <span> 至 </span>
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('end_time_6')">
+                      <standard-time-meridian>{{item.end_time_6 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                  </ionic-timepicker>
+                  <span>
+                    <button class="button icon ion-ios-refresh-empty" ng-click="timeClearAll('start_time_6', 'end_time_6')"></button>
+                  </span>
+                </div>
+              </div>
+              <div class="row item" ng-show="mode.holiday_type">
+                <div class="col">
+                  <span>週日</span>
+                </div>
+                <div class="col col-80">
+                  <ionic-timepicker input-obj="mode.timePickerObject">
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('start_time_0')">
+                      <standard-time-meridian>{{item.start_time_0 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                    <span> 至 </span>
+                    <button class="button button-calm" ng-click="timeSelectedSwitch('end_time_0')">
+                      <standard-time-meridian>{{item.end_time_0 | mysqlTimeFormat}}</standard-time-meridian>
+                    </button>
+                  </ionic-timepicker>
+                  <span>
+                    <button class="button icon ion-ios-refresh-empty" ng-click="timeClearAll('start_time_0', 'end_time_0')"></button>
+                  </span>
+                </div>
+              </div>
+
+          </div>
+
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 註記事項
+            </div>
+            <remarks-input form="myForm" model="item" maxlength="120"></remarks-input>
+            <!--div class="item item-body form-group" ng-class="{ 'has-error': myForm.remarks.$touched && myForm.remarks.$invalid }">
+              <div>
+                <input type="text" placeholder="請輸入" ng-model="item.remarks"
+                  name="remarks" class="form-control"
+                  ng-maxlength="120">
+                <div class="help-block" ng-messages="myForm.remarks.$error" ng-if="myForm.remarks.$touched">
+                  <div ng-messages-include="templates/form-errors.html"></div>
+                </div>
+              </div>
+            </div-->
+          </div>
+
+      </form>
+
+      <div class="row" ng-show="mode.edit">
+        <div class="col col-30 col-offset-20">
+          <button class="button button-block button-light" ng-click="cancelEdit()">取消</button>
+        </div>
+        <div class="col col-50">
+          <button class="button button-block button-light"
+            ng-disabled="
+            myForm.district.$dirty && myForm.district.$invalid ||
+            myForm.descriptions_1.$invalid ||
+            myForm.descriptions_2.$dirty && myForm.descriptions_2.$invalid ||
+            myForm.max_height.$dirty && myForm.max_height.$invalid ||
+            myForm.max_width.$dirty && myForm.max_width.$invalid ||
+            myForm.max_length.$dirty && myForm.max_length.$invalid ||
+            myForm.mobile.$invalid ||
+            myForm.email.$dirty && myForm.email.$invalid ||
+            myForm.remarks.$dirty && myForm.remarks.$invalid
+            "
+            ng-click="submitEdit()">送出更新</button>
+        </div>
+      </div>
+
+  </ion-content>
+</ion-view>

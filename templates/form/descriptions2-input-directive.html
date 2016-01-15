@@ -1,0 +1,13 @@
+<label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.descriptions_2.$touched && myForm.descriptions_2.$invalid }">
+  <span class="input-label">車位描述</span>
+  <input type="text" placeholder="" ng-model="item.descriptions_2"
+    name="descriptions_2" class="form-control"
+    ng-minlength="3"
+    ng-maxlength="100"
+    required>
+    <div class="help-block" ng-messages="myForm.descriptions_2.$error" ng-if="myForm.descriptions_2.$touched">
+      <div class="form-error" ng-message="minlength">請正確填入車位描述 (至少3個字)</div>
+      <div class="form-error" ng-message="maxlength">請正確填入車位描述 (最多100個字)</div>
+      <div ng-messages-include="templates/form-errors.html"></div>
+    </div>
+</label>

@@ -1,0 +1,13 @@
+<label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.mobile.$touched && myForm.mobile.$invalid }">
+  <span class="input-label">手機號碼</span>
+  <input type="text" placeholder="" ng-model="item.mobile"
+    name="mobile" class="form-control"
+    ng-minlength="10"
+    ng-maxlength="10"
+    required>
+    <div class="help-block" ng-messages="myForm.mobile.$error" ng-if="myForm.mobile.$touched">
+      <div class="form-error" ng-message="minlength">請正確填入手機號碼 (10個數字)</div>
+      <div class="form-error" ng-message="maxlength">請正確填入手機號碼 (10個數字)</div>
+      <div ng-messages-include="templates/form-errors.html"></div>
+    </div>
+</label>

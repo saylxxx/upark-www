@@ -1,0 +1,60 @@
+<ion-view view-title="UPARK">
+    <ion-content class="padding">
+      <div class="card row">
+        <div class="col">
+          <h3>{{item.name}}</h3>
+        </div>
+        <div class="col col-offset-33">
+          <a class="button icon-right ion-chevron-right button-clear">200公尺</a>
+        </div>
+      </div>
+
+      <div class="item item-body">
+        <img class="full-image" ng-src="img/ionic.png">
+        <div class="list card">
+          <div class="item item-divider">
+            <i class="icon ion-ios-pricetag-outline"></i> 地址
+          </div>
+          <div class="item item-body">
+            <div>
+              台北市復興南路2段...
+            </div>
+          </div>
+        </div>
+        <div class="list card">
+          <div class="item item-divider">
+            <i class="icon ion-ios-pricetag-outline"></i> 車位分享時段
+          </div>
+          <div class="item item-body">
+            <div>
+              <p>時段一</p>
+              <p>時段二</p>
+              <p>時段三</p>
+            </div>
+          </div>
+        </div>
+        <div class="list card">
+          <div class="item item-divider">
+            <i class="icon ion-ios-pricetag-outline"></i> 設施
+          </div>
+          <div class="item item-body">
+            <div>
+              <p>設施一</p>
+              <p>設施二</p>
+              <p>設施三</p>
+            </div>
+          </div>
+        </div>
+        <div class="list card">
+          <div class="item item-divider">
+            <i class="icon ion-ios-pricetag-outline"></i> 關於車位
+          </div>
+          <div class="item item-body">
+            <div>
+              <p>{{item.desc}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </ion-content>
+</ion-view>

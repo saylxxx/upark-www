@@ -1,0 +1,16 @@
+<ion-view view-title="我的預約">
+  <ion-content>
+
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" type="item-text-wrap"
+        ng-repeat="item in items" href="#/app/booking-detail/{{item.id}}">
+        <img ng-src="{{item.icon}}">
+        <h2>{{item.name}}</h2>
+        <p>{{item.desc}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+      <!--ion-infinite-scroll on-infinite="goInfinite()"></ion-infinite-scroll-->
+    </ion-list>
+
+  </ion-content>
+</ion-view>

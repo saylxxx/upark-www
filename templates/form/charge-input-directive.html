@@ -1,0 +1,19 @@
+<div class="list card">
+  <div class="item item-divider">
+    <i class="icon ion-ios-pricetag-outline"></i> 收費資訊
+  </div>
+  <div class="item item-body">
+    <ion-toggle ng-model="mode.charge" toggle-class="toggle-calm" ng-click="toggleCharge()">
+      <span ng-show="mode.charge">每小時計費</span>
+      <span ng-hide="mode.charge">不設定</span>
+    </ion-toggle>
+    <label class="item" ng-show="mode.charge">
+      <div class="range range-positive">
+        <i class="icon ion-ios-pulse"></i>
+        <input type="range" name="volume" min="0" max="100" ng-model="item.charge_price">
+        <i class="icon ion-ios-pulse-strong"></i>
+      </div>
+      <span>費用: {{item.charge_price | money:item.charge_type}}</span>
+    </label>
+  </div>
+</div>

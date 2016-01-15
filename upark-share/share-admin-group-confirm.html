@@ -1,0 +1,94 @@
+<ion-view>
+  <ion-nav-title>
+    <div class="bar bar-header">
+      <addr-luncher></addr-luncher>
+      <div class="h1 title">群組審核通過表單</div>
+      <!--button class="button button-clear button-positive" ng-click="edit()" ng-hide="mode.edit">Edit</button-->
+    </div>
+  </ion-nav-title>
+    <ion-content class="padding">
+
+      <progress-item model="item"></progress-item>
+
+      <div class="item item-body">
+
+        <div class="list card">
+          <div class="item item-divider">
+            申請時間
+          </div>
+          <div class="item item-body">
+            <p>{{item.create_time | dateInMillis | date:"yyyy/MM/dd 'at' h:mma"}}</p>
+          </div>
+        </div>
+
+        <form name="myForm" novalidate>
+          <div class="list card">
+            <div class="item item-divider">
+              <i class="icon ion-ios-pricetag-outline"></i> 座標確認
+            </div>
+            <div class="item">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">地址</span>
+                <input ng-model="item.addr" readonly>
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">車位數</span>
+                <input ng-model="item.upark_count" readonly>
+              </label>
+              <!--label class="item item-input item-stacked-label">
+                <input places-auto-complete size=80 id="addrInput"
+                  ng-model="item.addr"
+                  on-place-changed="placeChanged(place)"
+                  ng-focus="disableTap()" readonly>
+              </label-->
+              <map zoom="18" center="{{item.addr}}" disable-default-u-i="true"
+                data-tap-disabled="true">
+                <marker position="{{item.addr}}" title="{{item.addr}}"></marker>
+              </map>
+            </div>
+          </div>
+
+          <div class="item item-divider">
+            <i class="icon ion-ios-pricetag-outline"></i> 註記
+          </div>
+          <label class="item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.report.$touched && myForm.report.$invalid }">
+            <input type="text" placeholder="請輸入.." ng-model="item.report"
+              name="report" class="form-control"
+              ng-minlength="5"
+              ng-maxlength="50"
+              required>
+            <div class="help-block" ng-messages="myForm.report.$error" ng-if="myForm.report.$invalid">
+              <div class="form-error" ng-message="minlength">請簡述通過原因 (至少5個字元)</div>
+              <div ng-messages-include="templates/form-errors.html"></div>
+            </div>
+          </label>
+
+          <div class="row">
+            <div class="col col-30 col-offset-20">
+              <button class="button button-block button-light" ng-click="cancel()">取消</button>
+            </div>
+            <div class="col col-50">
+              <button class="button button-block button-balanced"
+                ng-disabled="
+                myForm.report.$invalid
+                "
+                ng-click="checkOk()">審核通過</button>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+
+      <div class="list card">
+        <div class="item item-divider">
+          車位照片
+        </div>
+        <div class="item item-body">
+          <img ng-src="{{item.photo_1 | photoPath}}" class="full-image">
+        </div>
+      </div>
+
+
+  </ion-content>
+</ion-view>

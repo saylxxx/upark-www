@@ -1,0 +1,30 @@
+<label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.max_height.$touched && myForm.max_height.$invalid }">
+  <span class="input-label">限制高度 (單位: cm)</span>
+  <input type="number" placeholder="" ng-model="item.max_height"
+    name="max_height" class="form-control"
+    min="0"
+    max="999">
+    <div class="help-block" ng-messages="myForm.max_height.$error" ng-if="myForm.max_height.$touched">
+      <div ng-messages-include="templates/form-errors.html"></div>
+    </div>
+</label>
+<label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.max_width.$touched && myForm.max_width.$invalid }">
+  <span class="input-label">限制寬度 (單位: cm)</span>
+  <input type="number" placeholder="" ng-model="item.max_width"
+    name="max_width" class="form-control"
+    min="0"
+    max="999">
+    <div class="help-block" ng-messages="myForm.max_width.$error" ng-if="myForm.max_width.$touched">
+      <div ng-messages-include="templates/form-errors.html"></div>
+    </div>
+</label>
+<label class="item item-input item-stacked-label form-group" ng-class="{ 'has-error': myForm.max_length.$touched && myForm.max_length.$invalid }">
+  <span class="input-label">限制長度 (單位: cm)</span>
+  <input type="number" placeholder="" ng-model="item.max_length"
+    name="max_length" class="form-control"
+    min="0"
+    max="999">
+    <div class="help-block" ng-messages="myForm.max_length.$error" ng-if="myForm.max_length.$touched">
+      <div ng-messages-include="templates/form-errors.html"></div>
+    </div>
+</label>
